@@ -5,13 +5,13 @@ export class CreateUserDto {
     example: 'John Doe',
     description: 'Full name of the user',
   })
-  name: string;
+  declare name: string;
 
   @ApiProperty({
     example: 'john@example.com',
     description: 'Email address of the user',
   })
-  email: string;
+  declare email: string;
 
   @ApiProperty({
     example: 25,
@@ -19,5 +19,5 @@ export class CreateUserDto {
     minimum: 18,
     maximum: 120,
   })
-  age: number;
+  declare age: number;
 }

@@ -6,7 +6,7 @@
   "private": true,
   "license": "LGPL-3.0-only",
   "scripts": {
-    "build": "nest build",
+    "build": "nest build && node ./scripts/rewrite-path-aliases.cjs",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
@@ -62,12 +62,21 @@
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "tsconfig": "<rootDir>/../tsconfig.spec.json"
+        }
+      ]
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@/(.*)\\.js$": "<rootDir>/$1",
+      "^@/(.*)$": "<rootDir>/$1"
+    }
   }
 }
